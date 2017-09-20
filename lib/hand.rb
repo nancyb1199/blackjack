@@ -8,16 +8,15 @@ def initialize
   @cards = []
   @hand_value = 0
   @winner = false
-  @ace_count = 0
-  @ace_is_eleven = false
+  @ace_in_hand = false
 end
 
 def calculate_score(hand)
   @hand_value = 0
-  @ace_count = 0
+  @ace_in_hand = false
   hand.cards.each do |card|
     if card.value == "A"
-      @ace_count += 1
+      @ace_in_hand = true
       @hand_value +=1
     elsif (card.value == "J" || card.value == "Q" || card.value == "K")
       @hand_value += 10
@@ -25,7 +24,7 @@ def calculate_score(hand)
       @hand_value += card.value
     end # if stmt
   end # do
-  if @ace_count > 0
+  if @ace_in_hand
     if (@hand_value + 10) > 21
       # do nothing because making one Ace 11 would bust
     else
@@ -36,15 +35,5 @@ def calculate_score(hand)
   return @hand_value
 end # calculate_score
 
-# def check_ace
-#   if @ace_count == 1 && ((@hand_value + 11) > 21)
-#     @hand_value += 1
-#   elsif @ace_count > 1
-#     @hand_value += 1
-#   else
-#     @hand_value += 11
-#   end # if stmt
-#
-# end # check_ace
 
 end #class
