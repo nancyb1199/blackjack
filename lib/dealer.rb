@@ -13,6 +13,8 @@ def initialize
   @dealer_hand = Hand.new
 end
 
+# To start a game we will shuffle the deck and
+# deal two cards to each player from the new deck
 def start_game(player)
   @deck.shuffle
   2.times{@player_hand.cards << @deck.draw}
@@ -23,6 +25,7 @@ def start_game(player)
   puts @dealer_hand.cards[1].value
   game_loop
 end
+
 
 def game_loop
   @player_hand.calculate_score(@player_hand)
@@ -37,9 +40,6 @@ def game_loop
       end_game
     else prompt_player
   end
-  # @dealer_hand.calculate_score(@dealer_hand)
-  # puts "dealer's calculated score"
-  # puts @dealer_hand.hand_value
 end
 
 def prompt_player
@@ -62,6 +62,9 @@ def check_dealer
   while @dealer_hand.hand_value < 17
     puts "Dealer hits"
     @dealer_hand.cards << @deck.draw
+    @dealer_hand.cards.each do |card|
+      print "#{card.value} "
+    end
     @dealer_hand.calculate_score(@dealer_hand)
     puts "Dealer total is #{@dealer_hand.hand_value} "
   end
@@ -73,6 +76,7 @@ def check_dealer
   elsif @dealer_hand.hand_value > @player_hand.hand_value
     @dealer_hand.winner = true
   else
+    # I think a tie goes to the Player!
     puts "It's a tie!"
     @player_hand.winner = true
   end
