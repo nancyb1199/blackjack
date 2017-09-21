@@ -11,7 +11,7 @@ class Game
   # start_game
 # end
 
-@dealer.start_game(@player)
+@dealer.start_game
 
 
 # input & output

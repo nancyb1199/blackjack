@@ -9,7 +9,7 @@ class Deck
         @cards.push(Card.new(value))
       end
     end
-    puts @cards.length
+    # puts @cards.length
   end
 
   def cards_left
